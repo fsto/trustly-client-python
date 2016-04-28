@@ -216,13 +216,13 @@ class APITestCase(unittest.TestCase):
             msg='Serialize ex5')
 
         ex6 = {
-                u'öäå': 3,
-                u'äåö': 2,
-                u'åöä': 1,
+                'öäå': 3,
+                'äåö': 2,
+                'åöä': 1,
                 }
 
         self.assertEqual(self.api.serialize_data(ex6),
-            u'äåö2åöä1öäå3',
+            'äåö2åöä1öäå3',
             msg='Serialize ex6')
 
 

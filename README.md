@@ -1,5 +1,5 @@
-Trustly Python Client
-=====================
+Trustly Python 3 Client
+=======================
 
 This is an example implementation of communication with the Trustly API using
 Python. It implements the standard Payments API as well as gives stubs for
@@ -15,8 +15,6 @@ directly into your own project and use it.
 
 If you find problem in the code or want to extend it feel free to fork it and send us
 a pull request.
-
-This code is written for python 2.7.
 
 Overview
 ========

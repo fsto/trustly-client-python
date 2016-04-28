@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 """
 
-import httplib
+import http.client
 import pkgutil
 import types
 import base64
@@ -73,15 +73,15 @@ class API(object):
         self.trustly_verifyer = PKCS1_v1_5.new(self.trustly_publickey)
 
     def serialize_data(self, data=None):
-        ret = unicode('')
-        if type(data) == types.ListType:
+        ret = str('')
+        if type(data) == list:
             for k in data:
                 ret = ret + self.serialize_data(k)
-        elif type(data) == types.DictType:
-            for k in sorted(data.keys(), cmp=locale.strcoll):
-                ret = ret + unicode(k) + self.serialize_data(data[k]) 
+        elif type(data) == dict:
+            for k in sorted(list(data.keys()), cmp=locale.strcoll):
+                ret = ret + str(k) + self.serialize_data(data[k]) 
         elif data is not None:
-            return unicode(data)
+            return str(data)
         return ret
 
     def _verify_trustly_signed_data(self, method, uuid, signature, data):
@@ -134,9 +134,9 @@ class API(object):
     def connect(self):
         try:
             if self.api_is_https:
-                call = httplib.HTTPSConnection(self.api_host, self.api_port)
+                call = http.client.HTTPSConnection(self.api_host, self.api_port)
             else:
-                call = httplib.HTTPConnection(self.api_host, self.api_port)
+                call = http.client.HTTPConnection(self.api_host, self.api_port)
 
         except Exception as e:
             raise trustly.exceptions.TrustlyConnectionError(str(e))

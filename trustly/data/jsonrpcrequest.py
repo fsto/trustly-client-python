@@ -44,7 +44,7 @@ class JSONRPCRequest(trustly.data.request.Request):
             payload = dict(params=dict())
                 # Sanity check
             if data is not None:
-                if type(data) != types.DictType and attributes is not None:
+                if type(data) != dict and attributes is not None:
                     raise TypeError('Data must be dict if attributes is provided')
                 else:
                     payload['params']['Data'] = data

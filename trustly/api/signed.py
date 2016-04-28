@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 """
 
-import httplib
+import http.client
 import uuid
 import base64
 from Crypto.Signature import PKCS1_v1_5
@@ -84,7 +84,7 @@ class SignedAPI(trustly.api.api.API):
         if data is None:
             data = {}
 
-        plaintext = unicode(method + uuid + self.serialize_data(data))
+        plaintext = str(method + uuid + self.serialize_data(data))
         sha1hash = SHA.new(plaintext.encode('utf-8'))
         signature = self.merchant_signer.sign(sha1hash)
         return base64.b64encode(signature)

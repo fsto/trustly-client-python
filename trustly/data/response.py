@@ -28,6 +28,7 @@ import pprint
 
 import trustly.data.data
 import trustly.exceptions
+import collections
 
 class Response(trustly.data.data.Data):
         # http response code and status from the actual call
@@ -133,13 +134,13 @@ class Response(trustly.data.data.Data):
         # found.
     def get_result(self, name=None):
         if name is not None:
-            if type(self.response_result) == types.DictType:
+            if type(self.response_result) == dict:
                 return self.response_result[name]
             else:
                 raise ValueError('Result is not a dict')
         else:
             copy = getattr(self.response_result, 'copy', None)
-            if callable(copy):
+            if isinstance(copy, collections.Callable):
                 return self.response_result.copy()
             else: 
                 return self.response_result

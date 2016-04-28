@@ -98,7 +98,7 @@ class UnsignedAPI(trustly.api.api.API):
     def call(self, method, **kwargs):
         data = trustly.data.jsonrpcrequest.JSONRPCRequest(method=method)
 
-        for (key, val) in kwargs.iteritems():
+        for (key, val) in kwargs.items():
             data.set_param(key, val)
 
         if not self.has_session_uuid():
