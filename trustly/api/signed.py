@@ -87,7 +87,7 @@ class SignedAPI(trustly.api.api.API):
         plaintext = str(method + uuid + self.serialize_data(data))
         sha1hash = SHA.new(plaintext.encode('utf-8'))
         signature = self.merchant_signer.sign(sha1hash)
-        return base64.b64encode(signature)
+        return base64.b64encode(signature).decode('utf-8')
 
     def insert_credentials(self, request):
         request.set_data('Username', self.api_username)
