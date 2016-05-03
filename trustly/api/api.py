@@ -78,8 +78,8 @@ class API(object):
             for k in data:
                 ret = ret + self.serialize_data(k)
         elif type(data) == dict:
-            for k in sorted(list(data.keys()), cmp=locale.strcoll):
-                ret = ret + str(k) + self.serialize_data(data[k]) 
+            for k in sorted(list(data.keys()), key=str):
+                ret = ret + str(k) + self.serialize_data(data[k])
         elif data is not None:
             return str(data)
         return ret
@@ -159,7 +159,7 @@ class API(object):
         return url
 
     def handle_notification(self, httpbody):
-        request = trustly.data.jsonrpcnotificationrequest.JSONRPCNotificationRequest(httpbody) 
+        request = trustly.data.jsonrpcnotificationrequest.JSONRPCNotificationRequest(httpbody)
 
         if self.verify_trustly_signed_notification(request) != True:
             raise trustly.exceptions.TrustlySignatureError('Incoming notification signature is not valid', request)
@@ -213,7 +213,7 @@ class API(object):
         return self.handle_response(request, call)
 
         # Return the last trustly.data.request.Request class used to issue a
-        # call. Useful for debugging data actually transmitted to trustly. 
+        # call. Useful for debugging data actually transmitted to trustly.
         #
         # NOTE: This will contain bare login credentials, proper caution should
         # be done before dumping this to screen or a log file to ensure login
