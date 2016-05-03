@@ -59,7 +59,7 @@ class SignedAPI(trustly.api.api.API):
                 self.load_merchant_privatekey(merchant_privatekey)
 
     def load_merchant_privatekey(self, filename):
-        pkeyfile = file(filename, 'r')
+        pkeyfile = open(filename, 'r')
         cert = pkeyfile.read()
         pkeyfile.close()
         self.use_merchant_privatekey(cert)
